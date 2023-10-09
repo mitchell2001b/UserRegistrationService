@@ -1,0 +1,40 @@
+version: '3.3'
+services:
+  user-registration-microservice:
+    image: ghcr.io/mitchell2001b/user-registration-service:master
+    build:
+      context: .
+
+    ports:
+      - "${SPRING_LOCAL_PORT}:${SPRING_DOCKER_PORT}"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:${MYSQLDB_LOCAL_PORT}/${MYSQLDB_DATABASE}
+    networks:
+      - my-network
+    depends_on:
+      - mysql-db
+
+  api-gateway:
+    image: api-gateway:latest
+    build:
+      context: ../ApiGateway
+
+    ports:
+      - "8585:8585"
+    networks:
+      - my-network
+
+
+  mysql-db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQLDB_DATABASE}
+
+    ports:
+      - "${MYSQLDB_DOCKER_PORT}:${MYSQLDB_LOCAL_PORT}"
+    networks:
+      - my-network
+
+networks:
+  my-network:
