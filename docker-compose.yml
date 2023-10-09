@@ -2,8 +2,6 @@ version: '3.3'
 services:
   user-registration-microservice:
     image: ghcr.io/mitchell2001b/user-registration-service:master
-    build:
-      context: .
 
     ports:
       - "${SPRING_LOCAL_PORT}:${SPRING_DOCKER_PORT}"
