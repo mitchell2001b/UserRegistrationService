@@ -99,7 +99,7 @@ jobs:
 
       - name: Restart Docker Compose services
         run: |
-          cd ../..
+          cd ../../../..
           pwd
           docker-compose down
           docker-compose up -d
