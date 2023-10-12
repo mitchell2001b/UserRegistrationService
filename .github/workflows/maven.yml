@@ -31,8 +31,7 @@ jobs:
       run: mvn -B package --file pom.xml
 
     - name: Replace the JAR file in Docker Compose configuration
-      run: |
-        cp -f ../../target/UserRegistrationMicroService-0.0.1-SNAPSHOT.jar UserRegistrationMicroService-0.0.1-SNAPSHOT.jar
+      run: cp -f ../../target/UserRegistrationMicroService-0.0.1-SNAPSHOT.jar UserRegistrationMicroService-0.0.1-SNAPSHOT.jar
 
     - name: Restart Docker Compose services
       run: |
