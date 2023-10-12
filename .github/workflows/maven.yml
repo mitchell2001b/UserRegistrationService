@@ -31,7 +31,3 @@ jobs:
       run: mvn -B package --file pom.xml
 
 
-    - name: Restart Docker Compose services
-      run: |
-        docker-compose -f docker-compose.yml up -d
-      working-directory: ../..
