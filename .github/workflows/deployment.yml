@@ -15,14 +15,14 @@ jobs:
       - name: Build and package Spring Boot application
         run: |         
           mvn clean package
-        working-directory: ${{ github.workspace }}
+        working-directory: ../..
 
       - name: Replace the JAR file in Docker Compose configuration
         run: |
           cp -f target/UserRegistrationMicroService-0.0.1-SNAPSHOT.jar .
-        working-directory: ${{ github.workspace }}
+        working-directory: ../..
 
       - name: Restart Docker Compose services
         run: |         
           docker-compose -f docker-compose.yml up -d
-        working-directory: ${{ github.workspace }}
+        working-directory: ../..
