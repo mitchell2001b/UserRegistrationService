@@ -34,6 +34,6 @@ public class AccountController {
     @GetMapping(value = "/testcall")
     public String testcall()
     {
-        return "bamiba";
+        return "dit is een test bericht";
     }
 }
