@@ -59,4 +59,14 @@ public class AccountDto implements Serializable {
         return RoleDto;
     }
 
+    @Override
+    public String toString() {
+        return "AccountDto{" +
+                "Id=" + Id +
+                ", PassWord='" + PassWord + '\'' +
+                ", DateOfBirth=" + DateOfBirth +
+                ", Email='" + Email + '\'' +
+                ", RoleDto=" + RoleDto +
+                '}';
+    }
 }
