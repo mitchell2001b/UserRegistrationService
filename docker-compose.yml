@@ -33,5 +33,4 @@ services:
 
 networks:
   messagebus_semester6_network:
-    external: true
-    name: semester6project_network
+
