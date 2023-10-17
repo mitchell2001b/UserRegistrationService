@@ -97,8 +97,4 @@ jobs:
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
 
-      - name: Restart Docker Compose services
-        run: |
-          pwd
-          docker-compose down
-          docker-compose up -d
+
