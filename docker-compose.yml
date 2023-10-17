@@ -8,7 +8,7 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:${MYSQLDB_LOCAL_PORT}/${MYSQLDB_DATABASE}
     networks:
-      - semester6_network
+      - messagebus_semester6_network
     depends_on:
       - mysql-db
 
@@ -19,7 +19,7 @@ services:
     ports:
       - "8585:8585"
     networks:
-      - semester6_network
+      - messagebus_semester6_network
 
   mysql-db:
     image: mysql:8.0
@@ -29,7 +29,8 @@ services:
     ports:
       - "${MYSQLDB_DOCKER_PORT}:${MYSQLDB_LOCAL_PORT}"
     networks:
-      - semester6_network
+      - messagebus_semester6_network
 
 networks:
-  semester6_network:
+  messagebus_semester6_network:
+    external: true
