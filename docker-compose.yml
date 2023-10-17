@@ -32,6 +32,5 @@ services:
       - semester6project_network
 
 networks:
-  default:
-    external:
+    external: true
       name: semester6project_network
