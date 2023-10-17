@@ -1,7 +1,11 @@
 package com.semester6.UserRegistrationMicroService.kafka;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.semester6.UserRegistrationMicroService.Account.Account;
+import com.semester6.UserRegistrationMicroService.Events.UserCreatedEvent;
 import com.semester6.UserRegistrationMicroService.dtos.AccountDto;
+import org.apache.catalina.User;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,24 +20,32 @@ public class RegistrationProducer
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(RegistrationProducer.class);
     private NewTopic topic;
-    private KafkaTemplate<String, AccountDto> kafkaTemplate;
+    private KafkaTemplate<String, UserCreatedEvent> kafkaTemplate;
+    private ObjectMapper ObjectMapperJson;
 
-    public RegistrationProducer(NewTopic topic, KafkaTemplate<String, AccountDto> kafkaTemplate)
+    public RegistrationProducer(NewTopic topic, KafkaTemplate<String, UserCreatedEvent> kafkaTemplate, ObjectMapper objectMapper)
     {
         this.topic = topic;
         this.kafkaTemplate = kafkaTemplate;
+        this.ObjectMapperJson = objectMapper;
     }
 
-    public void SendMessage(AccountDto accountEvent)
+    public void SendMessage(Object accountEvent)
     {
-        LOGGER.info(String.format("Registration event => %s", accountEvent.toString()));
+        try {
+            String jsonPayload = ObjectMapperJson.writeValueAsString(accountEvent);
 
-        //create message
+            LOGGER.info(String.format("Registration event => %s", jsonPayload));
 
-        Message<AccountDto> message = MessageBuilder
-                .withPayload(accountEvent)
-                .setHeader(KafkaHeaders.TOPIC, topic.name())
-                .build();
-        kafkaTemplate.send(message);
+            Message<String> message = MessageBuilder
+                    .withPayload(jsonPayload)
+                    .setHeader(KafkaHeaders.TOPIC, topic.name())
+                    .build();
+            kafkaTemplate.send(message);
+
+        } catch (JsonProcessingException e) {
+
+            LOGGER.error("Error serializing payload to JSON", e);
+        }
     }
 }

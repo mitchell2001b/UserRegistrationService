@@ -22,6 +22,17 @@ services:
     networks:
       - my-network
 
+  user-login-microservice:
+    image: ghcr.io/mitchell2001b/user-login-service:master
+
+    ports:
+      - "${LOGINSERVICE_LOCAL_PORT}:${LOGINSERVICE_DOCKER_PORT}"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql-db:${LOGINDB_DOCKER_PORT}/${LOGINDB_DATABASE}
+    networks:
+      - my-network
+    depends_on:
+      - loginservice-db
 
   mysql-db:
     image: mysql:8.0
@@ -34,5 +45,16 @@ services:
     networks:
       - my-network
 
+
+  loginservice-db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQLDB_DATABASE}
+
+    ports:
+      - "${LOGINDB_DOCKER_PORT}:${MYSQLDB_LOCAL_PORT}"
+    networks:
+      - my-network
 networks:
   my-network:
