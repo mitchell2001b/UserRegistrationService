@@ -12,15 +12,6 @@ services:
     depends_on:
       - mysql-db
 
-  api-gateway:
-    image: api-gateway:latest
-    build:
-      context: ../ApiGateway
-    ports:
-      - "8585:8585"
-    networks:
-      - semester6project_network
-
   mysql-db:
     image: mysql:8.0
     environment:
