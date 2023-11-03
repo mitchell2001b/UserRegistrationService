@@ -19,11 +19,14 @@ public class AccountService
         this.repoAccount = accountRepo;
         this.repoAccountRole = accountRoleRepository;
     }
-    public void AddUser(AccountDto account)
+    public Account AddUser(AccountDto account)
     {
-        AccountRole userRole = repoAccountRole.FindRoleByName("user");
+        AccountRole userRole = repoAccountRole.findRoleByName("user");
 
         Account accountToInsert = new Account(account.getDateOfBirth(), account.getPassWord(), account.getEmail(), userRole);
         this.repoAccount.save(accountToInsert);
+
+        return repoAccount.findLastCreatedAccount();
     }
+
 }

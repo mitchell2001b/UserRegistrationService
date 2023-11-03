@@ -10,5 +10,5 @@ import java.util.List;
 public interface IAccountRoleRepository extends JpaRepository<AccountRole, Integer>
 {
     @Query(value = "SELECT * FROM accountrole where name = ?1", nativeQuery = true)
-    public AccountRole FindRoleByName(String name);
+    public AccountRole findRoleByName(String name);
 }

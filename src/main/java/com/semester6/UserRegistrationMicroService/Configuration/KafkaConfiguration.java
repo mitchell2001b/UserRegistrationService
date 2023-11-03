@@ -18,7 +18,7 @@ public class KafkaConfiguration
     {
         return TopicBuilder.name(topicName)
                 .partitions(1)   // Set the number of partitions as needed
-                .replicas(3)
+                .replicas(1)
                 .build();
     }
 }

@@ -1,5 +1,7 @@
 package com.semester6.UserRegistrationMicroService.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.semester6.UserRegistrationMicroService.Account.Account;
 
 import java.io.Serializable;
@@ -8,9 +10,14 @@ import java.util.Objects;
 
 
 public class AccountDto implements Serializable {
+    @JsonProperty("id")
     private int Id;
+    @JsonProperty("password")
     private String PassWord;
+    @JsonProperty("dateofbirth")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate DateOfBirth;
+    @JsonProperty("email")
     private String Email;
 
     private AccountRoleDto RoleDto;
@@ -30,6 +37,13 @@ public class AccountDto implements Serializable {
         DateOfBirth = dateOfBirth;
         Email = email;
         RoleDto = roleId;
+
+    }
+    public AccountDto(String passWord, LocalDate dateOfBirth, String email) {
+
+        PassWord = passWord;
+        DateOfBirth = dateOfBirth;
+        Email = email;
 
     }
 

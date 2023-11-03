@@ -36,10 +36,22 @@ public class AccountController {
     @PostMapping(value = "/create")
     public ResponseEntity<String> createUser(@RequestBody AccountDto newAccount)
     {
-        service.AddUser(newAccount);
+        Account account = null;
+        try
+        {
+            account = service.AddUser(newAccount);
+        }
+        catch (Exception e)
+        {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("{could not create user}");
+        }
 
-        return ResponseEntity.status(HttpStatus.OK)
-                .body("{ \"id\": "+ 111 + " }");
+        UserCreatedEvent event = new UserCreatedEvent(account.GetUserId(), account.GetPassWord(), account.GetDateOfBirth(), account.GetEmail(), account.GetRole().getId(), account.GetRole().getName(), LocalDate.now());
+        registrationProducer.SendMessage(event);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("{ \"id\": "+ account.GetUserId() + " }");
     }
 
     @GetMapping(value = "/testcall")

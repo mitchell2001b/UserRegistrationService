@@ -15,12 +15,12 @@ public class Account
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
 
-    private String PassWord;
-    private LocalDate DateOfBirth;
+    private String Password;
+    private LocalDate Dateofbirth;
     @Column(unique=true)
     private String Email;
 
-    @OneToOne(orphanRemoval = true)
+    @ManyToOne()
     @JoinColumn(name = "accountRole_id")
     private AccountRole Role;
 
@@ -30,18 +30,18 @@ public class Account
     public Account(int id, LocalDate dateOfBirth, String passWord, String email, AccountRole accountRole)
     {
         Id = id;
-        DateOfBirth = dateOfBirth;
+        Dateofbirth = dateOfBirth;
         Email = email;
-        PassWord = passWord;
+        Password = passWord;
         Role = accountRole;
 
     }
 
     public Account(LocalDate dateOfBirth, String passWord, String email, AccountRole accountRole)
     {
-        DateOfBirth = dateOfBirth;
+        Dateofbirth = dateOfBirth;
         Email = email;
-        PassWord = passWord;
+        Password = passWord;
         Role = accountRole;
     }
 
@@ -54,12 +54,12 @@ public class Account
 
     public  LocalDate GetDateOfBirth()
     {
-        return DateOfBirth;
+        return Dateofbirth;
     }
 
     public String GetPassWord()
     {
-        return PassWord;
+        return Password;
     }
 
     public String GetEmail()
@@ -73,8 +73,8 @@ public class Account
     public String toString() {
         return "User{" +
                 "Id=" + Id +
-                ", PassWord='" + PassWord + '\'' +
-                ", DateOfBirth=" + DateOfBirth +
+                ", PassWord='" + Password + '\'' +
+                ", DateOfBirth=" + Dateofbirth +
                 ", Email='" + Email + '\'' +
                 '}';
     }
