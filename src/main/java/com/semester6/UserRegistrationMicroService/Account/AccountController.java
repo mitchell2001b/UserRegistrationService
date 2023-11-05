@@ -16,6 +16,7 @@ import java.time.LocalDate;
 
 
 @RestController
+@CrossOrigin(origins = {"*"})
 @RequestMapping(path = "api/accounts")
 public class AccountController {
 
