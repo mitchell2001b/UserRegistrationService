@@ -35,6 +35,7 @@ public class AccountController {
     }
 
     @PostMapping(value = "/create")
+    @CrossOrigin(origins = "http://localhost:8787, http://taskboarding-frontend:8787")
     public ResponseEntity<String> createUser(@RequestBody AccountDto newAccount)
     {
         Account account = null;
