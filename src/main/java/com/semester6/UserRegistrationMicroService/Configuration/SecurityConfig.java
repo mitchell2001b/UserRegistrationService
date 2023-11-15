@@ -10,10 +10,11 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 
 @Configuration
-public class CORSConfiguration {
+public class SecurityConfig {
 
     @Value("${allowed.origins}")
     private String[] allowedOrigins;
+
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {

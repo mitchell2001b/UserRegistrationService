@@ -36,7 +36,7 @@ public class AccountController {
 
     @PostMapping(value = "/create")
     @CrossOrigin(origins = "http://localhost:8787, http://taskboarding-frontend:8787")
-    public ResponseEntity<String> createUser(@RequestBody AccountDto newAccount)
+    public ResponseEntity<String> CreateUser(@RequestBody AccountDto newAccount)
     {
         Account account = null;
         try
@@ -57,7 +57,7 @@ public class AccountController {
     }
 
     @GetMapping(value = "/testcall")
-    public String testcall()
+    public String Testcall()
     {
         AccountRoleDto roleDto = new AccountRoleDto(1,"admin");
         AccountDto dto = new AccountDto(1, "pass", LocalDate.now(), "email", roleDto);
