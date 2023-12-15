@@ -2,6 +2,7 @@ package com.semester6.UserRegistrationMicroService.Account;
 
 import com.semester6.UserRegistrationMicroService.AccountRole.AccountRoleService;
 import com.semester6.UserRegistrationMicroService.Events.UserCreatedEvent;
+import com.semester6.UserRegistrationMicroService.Events.UserDeletedEvent;
 import com.semester6.UserRegistrationMicroService.dtos.AccountDto;
 import com.semester6.UserRegistrationMicroService.dtos.AccountRoleDto;
 import com.semester6.UserRegistrationMicroService.kafka.KafkaTopicClearService;
@@ -13,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 
 @RestController
@@ -59,9 +61,9 @@ public class AccountController {
     @GetMapping(value = "/testcall")
     public String Testcall()
     {
-        AccountRoleDto roleDto = new AccountRoleDto(1,"admin");
-        AccountDto dto = new AccountDto(1, "pass", LocalDate.now(), "email", roleDto);
-        UserCreatedEvent event = new UserCreatedEvent(1, "pass", LocalDate.now(), "email2gmail.com", roleDto.getId(), roleDto.getName(), LocalDate.now());
+        AccountRoleDto roleDto = new AccountRoleDto(1L,"admin");
+        AccountDto dto = new AccountDto(1L, "pass", LocalDate.now(), "email", roleDto);
+        UserCreatedEvent event = new UserCreatedEvent(1L, "pass", LocalDate.now(), "email2gmail.com", roleDto.getId(), roleDto.getName(), LocalDate.now());
         registrationProducer.SendMessage(event);
 
         return "dit is een test bericht";
@@ -70,7 +72,9 @@ public class AccountController {
     @GetMapping(value = "/testcall2")
     public String ClearTopic()
     {
-        clearTopicService.clearTopic(TopicName);
+        UserDeletedEvent userDeletedEvent = new UserDeletedEvent(1L, "email2@com.nl", new Date());
+        registrationProducer.SendMessageUserDeletion(userDeletedEvent);
+        //clearTopicService.clearTopic(TopicName);
         return "Topic cleared";
     }
 }

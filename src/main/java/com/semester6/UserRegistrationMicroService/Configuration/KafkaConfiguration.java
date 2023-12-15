@@ -12,13 +12,24 @@ public class KafkaConfiguration
     @Value("${spring.kafka.topic.name}")
     private String topicName;
 
+    @Value("${spring.kafka.topic2.name}")
+    private String topicNameUserDeletion;
     // spring bean for kafka topic
     @Bean
     public NewTopic topic()
     {
         return TopicBuilder.name(topicName)
                 .partitions(1)   // Set the number of partitions as needed
-                .replicas(3)
+                .replicas(1)
+                .build();
+    }
+
+    @Bean
+    public NewTopic topicNameUserDeletion()
+    {
+        return TopicBuilder.name(topicNameUserDeletion)
+                .partitions(1)   // Set the number of partitions as needed
+                .replicas(1)
                 .build();
     }
 }

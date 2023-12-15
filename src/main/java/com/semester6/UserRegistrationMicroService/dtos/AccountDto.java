@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class AccountDto implements Serializable {
     @JsonProperty("id")
-    private int Id;
+    private Long Id;
     @JsonProperty("password")
     private String PassWord;
     @JsonProperty("dateofbirth")
@@ -22,7 +22,7 @@ public class AccountDto implements Serializable {
 
     private AccountRoleDto RoleDto;
 
-    public AccountDto(int id, String passWord, LocalDate dateOfBirth, String email, AccountRoleDto roleId) {
+    public AccountDto(Long id, String passWord, LocalDate dateOfBirth, String email, AccountRoleDto roleId) {
         Id = id;
         PassWord = passWord;
         DateOfBirth = dateOfBirth;
@@ -52,7 +52,7 @@ public class AccountDto implements Serializable {
 
     }
 
-    public int getId() {
+    public Long getId() {
         return Id;
     }
 

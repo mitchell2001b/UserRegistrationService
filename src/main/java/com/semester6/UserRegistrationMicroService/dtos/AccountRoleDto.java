@@ -9,10 +9,10 @@ import java.util.Objects;
  * A DTO for the {@link AccountRole} entity
  */
 public class AccountRoleDto implements Serializable {
-    private int Id;
+    private Long Id;
     private String Name;
 
-    public AccountRoleDto(int id, String name)
+    public AccountRoleDto(Long id, String name)
     {
         Id = id;
         Name = name;
@@ -27,7 +27,7 @@ public class AccountRoleDto implements Serializable {
 
     }
 
-    public int getId() {
+    public Long getId() {
         return Id;
     }
 

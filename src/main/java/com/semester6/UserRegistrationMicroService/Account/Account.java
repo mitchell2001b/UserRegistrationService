@@ -13,7 +13,7 @@ public class Account
 {
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private Long Id;
 
     private String Password;
     private LocalDate Dateofbirth;
@@ -27,7 +27,7 @@ public class Account
     public Account() {
     }
 
-    public Account(int id, LocalDate dateOfBirth, String passWord, String email, AccountRole accountRole)
+    public Account(Long id, LocalDate dateOfBirth, String passWord, String email, AccountRole accountRole)
     {
         Id = id;
         Dateofbirth = dateOfBirth;
@@ -47,7 +47,7 @@ public class Account
 
 
 
-    public int GetUserId()
+    public Long GetUserId()
     {
         return Id;
     }

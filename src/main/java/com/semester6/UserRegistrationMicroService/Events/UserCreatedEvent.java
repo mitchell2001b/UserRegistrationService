@@ -5,18 +5,18 @@ import java.time.LocalDate;
 
 public class UserCreatedEvent implements Serializable
 {
-    private int Id;
+    private Long Id;
     private String PassWord;
     private LocalDate DateOfBirth;
     private String Email;
 
 
-    private int RoleId;
+    private Long RoleId;
     private String RoleName;
 
     private LocalDate CreatedAt;
 
-    public UserCreatedEvent(int id, String passWord, LocalDate dateOfBirth, String email, int roleId, String roleName, LocalDate createdAt) {
+    public UserCreatedEvent(Long id, String passWord, LocalDate dateOfBirth, String email, Long roleId, String roleName, LocalDate createdAt) {
         Id = id;
         PassWord = passWord;
         DateOfBirth = dateOfBirth;
@@ -31,7 +31,7 @@ public class UserCreatedEvent implements Serializable
 
     }
 
-    public int getId() {
+    public Long getId() {
         return Id;
     }
 
@@ -47,7 +47,7 @@ public class UserCreatedEvent implements Serializable
         return Email;
     }
 
-    public int getRoleId() {
+    public Long getRoleId() {
         return RoleId;
     }
 

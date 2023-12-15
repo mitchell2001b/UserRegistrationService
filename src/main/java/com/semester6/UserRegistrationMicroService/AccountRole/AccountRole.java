@@ -8,7 +8,7 @@ public class AccountRole
 {
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int Id;
+    private Long Id;
     @Column(unique=true)
     private String Name;
 
@@ -17,7 +17,7 @@ public class AccountRole
 
     }
 
-    public  AccountRole(int id, String name)
+    public  AccountRole(Long id, String name)
     {
         Id = id;
         Name = name;
@@ -27,7 +27,7 @@ public class AccountRole
         Name = name;
     }
 
-    public int getId() {
+    public Long getId() {
         return Id;
     }
 
