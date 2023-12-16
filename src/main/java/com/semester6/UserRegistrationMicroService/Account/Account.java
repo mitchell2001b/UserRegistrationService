@@ -14,10 +14,11 @@ public class Account
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-
+    @Column(nullable = false, length = 40)
     private String Password;
+    @Column(nullable = false)
     private LocalDate Dateofbirth;
-    @Column(unique=true)
+    @Column(unique=true, nullable = false, length = 20)
     private String Email;
 
     @ManyToOne()

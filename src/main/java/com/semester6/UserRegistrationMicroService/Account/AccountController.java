@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Optional;
 
 
 @RestController
@@ -58,6 +59,53 @@ public class AccountController {
                 .body("{ \"id\": "+ account.GetUserId() + " }");
     }
 
+    @DeleteMapping("/{Id}")
+    public ResponseEntity<String> DeleteUser(@PathVariable("Id") Long Id)
+    {
+        try
+        {
+            Optional<Account> account = service.SelectAccountById(Id);
+            Date date = new Date();
+            if(account.isPresent())
+            {
+                UserDeletedEvent event = new UserDeletedEvent(account.get().GetUserId(), account.get().GetEmail(), date);
+                registrationProducer.SendMessageUserDeletion(event);
+                service.DeleteUser(account.get());
+            }
+
+        }
+        catch (Exception e)
+        {
+            return  ResponseEntity.status((HttpStatus.CONFLICT))
+                    .body("Could not delete user");
+        }
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("User deletion succesfull");
+    }
+    @GetMapping("/myuserdata/{id}")
+    public ResponseEntity<String> RetrieveAllDataFromUser(@PathVariable Long Id)
+    {
+        AccountDto dto = null;
+        try
+        {
+            Optional<Account> account = service.SelectAccountById(Id);
+            dto = new AccountDto(account.get().GetPassWord(), account.get().GetDateOfBirth(), account.get().GetEmail());
+
+        }
+        catch (Exception ex)
+        {
+            return ResponseEntity.status((HttpStatus.CONFLICT))
+                    .body("Could not retrieve user data");
+        }
+
+        return ResponseEntity.status((HttpStatus.OK))
+                .body(dto.toString());
+
+    }
+
+
+
     @GetMapping(value = "/testcall")
     public String Testcall()
     {
@@ -72,7 +120,7 @@ public class AccountController {
     @GetMapping(value = "/testcall2")
     public String ClearTopic()
     {
-        UserDeletedEvent userDeletedEvent = new UserDeletedEvent(1L, "email2@com.nl", new Date());
+        UserDeletedEvent userDeletedEvent = new UserDeletedEvent(1L, "test@gmail.com", new Date());
         registrationProducer.SendMessageUserDeletion(userDeletedEvent);
         //clearTopicService.clearTopic(TopicName);
         return "Topic cleared";

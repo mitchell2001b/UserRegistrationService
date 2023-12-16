@@ -2,11 +2,13 @@ package com.semester6.UserRegistrationMicroService.Account;
 
 import com.semester6.UserRegistrationMicroService.AccountRole.AccountRole;
 import com.semester6.UserRegistrationMicroService.dtos.AccountDto;
-import com.semester6.UserRegistrationMicroService.dtos.AccountRoleDto;
 import com.semester6.UserRegistrationMicroService.repositories.IAccountRepository;
 import com.semester6.UserRegistrationMicroService.repositories.IAccountRoleRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class AccountService
@@ -27,6 +29,21 @@ public class AccountService
         this.repoAccount.save(accountToInsert);
 
         return repoAccount.findLastCreatedAccount();
+    }
+
+    @Transactional
+    public void DeleteUser(Account accountToDelete)
+    {
+        if(accountToDelete != null)
+        {
+            this.repoAccount.delete(accountToDelete);
+        }
+
+    }
+
+    public Optional<Account> SelectAccountById(Long id)
+    {
+        return this.repoAccount.findById(id);
     }
 
 }
