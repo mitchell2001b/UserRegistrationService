@@ -1,8 +1,6 @@
 D:\projecten\semester6individueel\UserRegistrationService\src\main\java\com\semester6\UserRegistrationMicroService\AccountRole\AccountRoleService.java
 D:\projecten\semester6individueel\UserRegistrationService\src\main\java\com\semester6\UserRegistrationMicroService\Configuration\KafkaConfiguration.java
-D:\projecten\semester6individueel\UserRegistrationService\src\main\java\com\semester6\UserRegistrationMicroService\ResourceSizeAdvice.java
 D:\projecten\semester6individueel\UserRegistrationService\src\main\java\com\semester6\UserRegistrationMicroService\Account\Account.java
-D:\projecten\semester6individueel\UserRegistrationService\src\main\java\com\semester6\UserRegistrationMicroService\Configuration\CORSConfiguration.java
 D:\projecten\semester6individueel\UserRegistrationService\src\main\java\com\semester6\UserRegistrationMicroService\Account\AccountService.java
 D:\projecten\semester6individueel\UserRegistrationService\src\main\java\com\semester6\UserRegistrationMicroService\Events\UserCreatedEvent.java
 D:\projecten\semester6individueel\UserRegistrationService\src\main\java\com\semester6\UserRegistrationMicroService\kafka\KafkaTopicClearService.java
@@ -12,5 +10,7 @@ D:\projecten\semester6individueel\UserRegistrationService\src\main\java\com\seme
 D:\projecten\semester6individueel\UserRegistrationService\src\main\java\com\semester6\UserRegistrationMicroService\kafka\RegistrationProducer.java
 D:\projecten\semester6individueel\UserRegistrationService\src\main\java\com\semester6\UserRegistrationMicroService\repositories\IAccountRepository.java
 D:\projecten\semester6individueel\UserRegistrationService\src\main\java\com\semester6\UserRegistrationMicroService\repositories\IAccountRoleRepository.java
+D:\projecten\semester6individueel\UserRegistrationService\src\main\java\com\semester6\UserRegistrationMicroService\Events\UserDeletedEvent.java
 D:\projecten\semester6individueel\UserRegistrationService\src\main\java\com\semester6\UserRegistrationMicroService\Account\AccountController.java
+D:\projecten\semester6individueel\UserRegistrationService\src\main\java\com\semester6\UserRegistrationMicroService\dtos\AccountgdprDto.java
 D:\projecten\semester6individueel\UserRegistrationService\src\main\java\com\semester6\UserRegistrationMicroService\UserRegistrationMicroServiceApplication.java

@@ -5,6 +5,7 @@ import com.semester6.UserRegistrationMicroService.Events.UserCreatedEvent;
 import com.semester6.UserRegistrationMicroService.Events.UserDeletedEvent;
 import com.semester6.UserRegistrationMicroService.dtos.AccountDto;
 import com.semester6.UserRegistrationMicroService.dtos.AccountRoleDto;
+import com.semester6.UserRegistrationMicroService.dtos.AccountgdprDto;
 import com.semester6.UserRegistrationMicroService.kafka.KafkaTopicClearService;
 import com.semester6.UserRegistrationMicroService.kafka.RegistrationProducer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,6 @@ public class AccountController {
     }
 
     @PostMapping(value = "/create")
-    @CrossOrigin(origins = "http://localhost:8787, http://taskboarding-frontend:8787")
     public ResponseEntity<String> CreateUser(@RequestBody AccountDto newAccount)
     {
         Account account = null;
@@ -83,14 +83,14 @@ public class AccountController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body("User deletion succesfull");
     }
-    @GetMapping("/myuserdata/{id}")
+    @GetMapping("/myuserdata/{Id}")
     public ResponseEntity<String> RetrieveAllDataFromUser(@PathVariable Long Id)
     {
-        AccountDto dto = null;
+        AccountgdprDto dto = null;
         try
         {
             Optional<Account> account = service.SelectAccountById(Id);
-            dto = new AccountDto(account.get().GetPassWord(), account.get().GetDateOfBirth(), account.get().GetEmail());
+            dto = new AccountgdprDto(account.get().GetPassWord(), account.get().GetDateOfBirth(), account.get().GetEmail());
 
         }
         catch (Exception ex)
@@ -124,5 +124,20 @@ public class AccountController {
         registrationProducer.SendMessageUserDeletion(userDeletedEvent);
         //clearTopicService.clearTopic(TopicName);
         return "Topic cleared";
+    }
+
+    @GetMapping(value = "/dummyroles")
+    public String SetupDummyRoles()
+    {
+        try
+        {
+            service.CreateRoles();
+        }
+        catch (Exception exception)
+        {
+            return "Creating dummy roles failed";
+        }
+
+        return "Dummy roles created";
     }
 }

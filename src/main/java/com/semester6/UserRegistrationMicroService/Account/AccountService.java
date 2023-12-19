@@ -41,6 +41,22 @@ public class AccountService
 
     }
 
+    public void CreateRoles()
+    {
+        AccountRole userRole = new AccountRole(1L, "user");
+        AccountRole adminRole = new AccountRole(2L, "admin");
+        try
+        {
+            this.repoAccountRole.save(userRole);
+            this.repoAccountRole.save(adminRole);
+        }
+        catch (Exception exception)
+        {
+
+        }
+
+    }
+
     public Optional<Account> SelectAccountById(Long id)
     {
         return this.repoAccount.findById(id);
